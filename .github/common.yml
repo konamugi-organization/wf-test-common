@@ -1,0 +1,30 @@
+name: Common Workflow
+
+on:
+  workflow_dispatch:
+    secrets:
+      dev_secret: ${{ secrets.DEV_SECRET }}
+      common_secret: ${{ secrets.COMMON_SECRET }}
+
+jobs:
+  common-sample:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: echo in commmon workflow
+        run: |
+        echo "dev_secret: ${{ secrets.dev_secret }}"
+        echo "common_secret: ${{ secrets.common_secret }}"
+        echo "org_secret: ${{ secrets.ORG_SECRET }}"
+
+      - name: Call echo.yml with secret value as argument
+        uses: ./echo.yml
+        with:
+          dev_secret: ${{ secrets.dev_secret }}
+          common_secret: ${{ secrets.common_secret }}
+          org_secret: ${{ secrets.ORG_SECRET }}
+
