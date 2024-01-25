@@ -2,9 +2,11 @@ name: Common Workflow
 
 on:
   workflow_call:
-    secrets:
-      dev_secret: ${{ secrets.DEV_SECRET }}
-      common_secret: ${{ secrets.COMMON_SECRET }}
+    inputs:
+      dev_secret:
+        type: string
+      common_secret:
+        type: string
 
 jobs:
   common-sample:
@@ -17,14 +19,15 @@ jobs:
     steps:
       - name: echo in commmon workflow
         run: |
-        echo "dev_secret: ${{ secrets.dev_secret }}"
-        echo "common_secret: ${{ secrets.common_secret }}"
-        echo "org_secret: ${{ secrets.ORG_SECRET }}"
+          echo "input dev_secret: ${{  inputs.dev_secret }}"
+          echo "input common_secret: ${{ inputs.common_secret }}"
+          echo "org_secret: ${{ secrets.ORG_SECRET }}"
+
 
       - name: Call echo.yml with secret value as argument
         uses: ./echo.yml
         with:
-          dev_secret: ${{ secrets.dev_secret }}
-          common_secret: ${{ secrets.common_secret }}
+          dev_secret: ${{ inputs.dev_secret }}
+          common_secret: ${{ inputs.common_secret }}
           org_secret: ${{ secrets.ORG_SECRET }}
 

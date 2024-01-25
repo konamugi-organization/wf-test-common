@@ -17,6 +17,6 @@ jobs:
     steps:
       - name: Echo input value
         run: |
-        echo "dev_secret: ${{ inputs.dev_secret }}"
-        echo "common_secret: ${{ inputs.common_secret }}"
-        echo "org_secret: ${{ inputs.org_secret }}"
+          echo "dev_secret: ${{ inputs.dev_secret }}"
+          echo "common_secret: ${{ inputs.common_secret }}"
+          echo "org_secret: ${{ inputs.org_secret }}"
