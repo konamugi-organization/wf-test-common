@@ -1,7 +1,7 @@
 name: Common Workflow
 
 on:
-  workflow_dispatch:
+  workflow_call:
     secrets:
       dev_secret: ${{ secrets.DEV_SECRET }}
       common_secret: ${{ secrets.COMMON_SECRET }}
